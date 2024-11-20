@@ -114,7 +114,7 @@ func (cc *ChainConfig) GetValInfo(first bool) (err error) {
 
 	var signingInfo *slashing.ValidatorSigningInfo
 	if cc.NamadaEstablishedAddress != "" {
-		signingInfo, err = getNamadaSigningInfo(ctx, cc.client, cc.valInfo.Valcons, cc.NamadaEstablishedAddress)
+		signingInfo, err = getNamadaSigningInfo(ctx, cc.client, cc.valInfo.Valcons)
 	} else {
 		signingInfo, err = getTendermintSigningInfo(ctx, cc.client, cc.valInfo.Valcons)
 	}
@@ -237,7 +237,7 @@ func getTendermintSigningInfo(ctx context.Context, client *rpchttp.HTTP, valcons
 	return &info.ValSigningInfo, nil
 }
 
-func getNamadaSigningInfo(ctx context.Context, client *rpchttp.HTTP, valconsAddress, establishedAddress string) (*slashing.ValidatorSigningInfo, error) {
+func getNamadaSigningInfo(ctx context.Context, client *rpchttp.HTTP, valconsAddress string) (*slashing.ValidatorSigningInfo, error) {
 	livenessInfo, err := getLivenessInfo(ctx, client)
 	if err != nil {
 		return nil, err
