@@ -109,6 +109,8 @@ type ChainConfig struct {
 	// ValAddress is the validator operator address to be monitored. Tenderduty v1 required the consensus address,
 	// this is no longer needed. The operator address is much easier to find in explorers etc.
 	ValAddress string `yaml:"valoper_address"`
+	// NamadaEstablishedAddress is the established validator address.
+	NamadaEstablishedAddress string `yaml:"namada_established_address,omitempty"`
 	// ValconsOverride allows skipping the lookup of the consensus public key and setting it directly.
 	ValconsOverride string `yaml:"valcons_override"`
 	// ExtraInfo will be appended to the alert data. This is useful for pagerduty because multiple tenderduty instances
