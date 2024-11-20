@@ -177,6 +177,23 @@ type Epoch uint64
 
 type ValidatorState borsh.Enum
 
+func (v ValidatorState) String() string {
+	switch v {
+	case ValidatorStateConsensus:
+		return "Consensus"
+	case ValidatorStateBelowCapacity:
+		return "BelowCapacity"
+	case ValidatorStateBelowThreshold:
+		return "BelowThreshold"
+	case ValidatorStateInactive:
+		return "Inactive"
+	case ValidatorStateJailed:
+		return "Jailed"
+	default:
+		return "Unknown"
+	}
+}
+
 const (
 	ValidatorStateConsensus ValidatorState = iota
 	ValidatorStateBelowCapacity
