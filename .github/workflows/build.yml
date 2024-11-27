@@ -32,4 +32,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: tenderduty-${{ matrix.os }}-${{ matrix.arch }}
-        path: build/${{ matrix.os }}-${{ matrix.arch }}/
+        path: build/${{ matrix.os }}-${{ matrix.arch }}
