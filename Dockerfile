@@ -1,11 +1,12 @@
 # 1st stage, build app
-FROM golang:1.19 as builder
-RUN apt-get update && apt-get -y upgrade && apt-get install -y upx
+FROM golang:1.23.3 as builder
+# Package upx-ucl is not found in current stable debian bookworm
+#RUN apt-get update && apt-get -y upgrade && apt-get install -y upx
 COPY . /build/app
 WORKDIR /build/app
 
 RUN go get ./... && go build -ldflags "-s -w" -trimpath -o tenderduty main.go
-RUN upx tenderduty && upx -t tenderduty
+#RUN upx tenderduty && upx -t tenderduty
 
 # 2nd stage, create a user to copy, and install libraries needed if connecting to upstream TLS server
 # we don't want the /lib and /lib64 from the go container cause it has more than we need.
