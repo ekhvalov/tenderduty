@@ -26,10 +26,10 @@ jobs:
     - name: Build binaries
       run: |
         mkdir -p build
-        GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -ldflags "-s -w" -trimpath -o build/${{ matrix.os }}-${{ matrix.arch }} main.go
+        GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -ldflags "-s -w" -trimpath -o build/${{ matrix.os }}-${{ matrix.arch }}/tenderduty main.go
 
     - name: Upload binaries
       uses: actions/upload-artifact@v4
       with:
         name: tenderduty-${{ matrix.os }}-${{ matrix.arch }}
-        path: build/${{ matrix.os }}-${{ matrix.arch }}
+        path: build/${{ matrix.os }}-${{ matrix.arch }}/
