@@ -10,9 +10,9 @@ jobs:
 
     strategy:
       matrix:
-        go-version: [1.17]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        arch: [amd64, arm64]
+        go-version: [ 1.23 ]
+        os: [ linux, darwin ]
+        arch: [ amd64, arm64 ]
 
     steps:
     - name: Checkout code
@@ -26,10 +26,10 @@ jobs:
     - name: Build binaries
       run: |
         mkdir -p build
-        GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -o build/${{ matrix.os }}-${{ matrix.arch }}/ ./...
+        GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -ldflags "-s -w" -trimpath -o build/${{ matrix.os }}-${{ matrix.arch }} main.go
 
     - name: Upload binaries
       uses: actions/upload-artifact@v4
       with:
-        name: binaries-${{ matrix.os }}-${{ matrix.arch }}
+        name: tenderduty-${{ matrix.os }}-${{ matrix.arch }}
         path: build/${{ matrix.os }}-${{ matrix.arch }}/
