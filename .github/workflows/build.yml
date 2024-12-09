@@ -29,6 +29,7 @@ jobs:
           GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -ldflags "-s -w" -trimpath -o build/tenderduty-${{ matrix.os }}-${{ matrix.arch }} main.go
 
   upload:
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
       - name: Compress
