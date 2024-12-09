@@ -30,11 +30,11 @@ jobs:
 
       - name: Compress
         working-directory: ./build
-        run: gzip ./tenderduty-${{ matrix.os }}-${{ matrix.arch }}
+        run: gzip tenderduty-${{ matrix.os }}-${{ matrix.arch }}
 
       - name: Calculate hashes
         working-directory: ./build
-        run: sha256sum -b ./tenderduty-${{ matrix.os }}-${{ matrix.arch }} >> sha256sums.txt
+        run: sha256sum tenderduty-${{ matrix.os }}-${{ matrix.arch }}.gz >> sha256sums.txt
 
       - name: Upload binaries
         uses: softprops/action-gh-release@v2
