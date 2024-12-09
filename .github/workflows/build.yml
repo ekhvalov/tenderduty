@@ -28,16 +28,13 @@ jobs:
           mkdir -p build
           GOARCH=${{ matrix.arch }} GOOS=${{ matrix.os }} go build -ldflags "-s -w" -trimpath -o build/tenderduty-${{ matrix.os }}-${{ matrix.arch }} main.go
 
-  upload:
-    runs-on: ubuntu-latest
-    steps:
       - name: Compress
         working-directory: ./build
-        run: gzip ./*
+        run: gzip ./tenderduty-${{ matrix.os }}-${{ matrix.arch }}
 
       - name: Calculate hashes
         working-directory: ./build
-        run: sha256sum -b ./* > sha256sums.txt
+        run: sha256sum -b ./tenderduty-${{ matrix.os }}-${{ matrix.arch }} >> sha256sums.txt
 
       - name: Upload binaries
         uses: softprops/action-gh-release@v2
