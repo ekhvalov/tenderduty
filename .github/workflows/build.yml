@@ -34,7 +34,7 @@ jobs:
 
       - name: Calculate hashes
         working-directory: ./build
-        run: sha256sum tenderduty-${{ matrix.os }}-${{ matrix.arch }}.gz >> sha256sums.txt
+        run: sha256sum tenderduty-${{ matrix.os }}-${{ matrix.arch }}.gz > tenderduty-${{ matrix.os }}-${{ matrix.arch }}.gz.sha256sum
 
       - name: Upload binaries
         uses: softprops/action-gh-release@v2
