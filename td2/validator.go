@@ -42,17 +42,6 @@ func (cc *ChainConfig) GetValInfo(first bool) (err error) {
 		cc.valInfo = &ValInfo{}
 	}
 
-	res, err := cc.client.ABCIQuery(ctx, fmt.Sprintf("/vp/pos/validator/state/%s", cc.NamadaEstablishedAddress), nil)
-	if err != nil {
-		return err
-	}
-
-	validatorState := namada.ValidatorStateInfo{}
-	err = borsh.Deserialize(&validatorState, res.Response.Value)
-	if err != nil {
-		return err
-	}
-
 	// Fetch info from /cosmos.staking.v1beta1.Query/Validator
 	// it's easier to ask people to provide valoper since it's readily available on
 	// explorers, so make it easy and lookup the consensus key for them.
